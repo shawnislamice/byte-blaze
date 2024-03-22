@@ -6,18 +6,19 @@ import EmptyState from "../components/EmptyState";
 
 const Bookmarks = () => {
   const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    const storedBlogs = getBlogs();
+    setBlogs(storedBlogs);
+  }, []);
   const handleDelete = (id) => {
     deleteBlogs(id);
     const storedBlogs = getBlogs();
     setBlogs(storedBlogs);
   };
-  if(blogs.length<1){
-    return (<EmptyState message='No Bookmarks Available!'></EmptyState>)
+  if (blogs.length < 1) {
+    return <EmptyState message="No Bookmarks Available!"></EmptyState>;
   }
-  useEffect(() => {
-    const storedBlogs = getBlogs();
-    setBlogs(storedBlogs);
-  }, []);
+
   return (
     <div className="grid justify-center py-8 px-4 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {blogs.map((blog, index) => (
